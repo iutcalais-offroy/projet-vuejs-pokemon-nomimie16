@@ -13,7 +13,7 @@ const verifregisterPassword = ref('');
 
 
 const switchToRegister = () => {
-  //passer à l'onglet d'inscription
+  //passer onglet d'inscription
   console.log('Passer à l\'onglet d\'inscription');
   const tabs = document.querySelector('.n-tabs');
   if (tabs) {
@@ -25,7 +25,7 @@ const switchToRegister = () => {
 };
 
 const switchToConnexion = () => {
-  //passer à l'onglet de connexion
+  //passer onglet de connexion
   console.log('Passer à l\'onglet de connexion');
   const tabs = document.querySelector('.n-tabs');
   if (tabs) {
@@ -37,17 +37,21 @@ const switchToConnexion = () => {
 };
 
 
-const handleLogin = () => {
+const handleLogin = async () => {
   //connexion
-  
-  
+    
   try {
-    const response = axios.post('https://pokemon-api-seyrinian-production.up.railway.app/users/login',
+    const response = await axios.post('https://pokemon-api-seyrinian-production.up.railway.app/users/login',
     {
-      email: registerEmail.value,
-      password: registerPassword.value
+      email: loginEmail.value,
+      password: loginPassword.value
     });
     console.log('connexion réussi:', response.data);
+    localStorage.token = response.data.token;
+    localStorage.userid = response.data.user.id;
+    // console.log('token:', localStorage.token);
+    // console.log('userId:', localStorage.user.id);
+    window.location.href = '/deck-builder';
   } catch (error) {
     console.error('Erreur lors de l\'inscription:', error);
   }
@@ -58,7 +62,6 @@ const handleRegister = async () => {
   //inscription
   console.log('Inscription avec', registerEmail.value, registerPassword.value);
   console.log('Formulaire de connexion soumis');
-  console.log('handleRegister() appelé');
   if (registerPassword.value !== verifregisterPassword.value) {
     console.error('Les mots de passe ne correspondent pas');
     return;
@@ -71,7 +74,7 @@ const handleRegister = async () => {
       password: registerPassword.value
     });
     console.log('Inscription réussie:', response.data);
-    switchToConnexion();
+    window.location.reload();
   } catch (error) {
     console.error('Erreur lors de l\'inscription:', error);
   }
