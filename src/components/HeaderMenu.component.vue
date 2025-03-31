@@ -30,5 +30,10 @@ const menuOptions = computed(() => [
       router.push('/login');
     }
   }
+  // {
+  //   label: username.value,
+  //   key: 'username',
+  //   disabled: true // Désactiver l'option de menu pour le nom d'utilisateur
+  // }
 ]);
 </script>
