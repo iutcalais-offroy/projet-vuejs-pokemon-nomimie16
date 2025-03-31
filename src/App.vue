@@ -6,7 +6,7 @@ import HeaderMenu from './components/HeaderMenu.component.vue';
 <template>
   <n-config-provider>
     <n-layout>
-      <n-layout-header>
+      <n-layout-header class="header">
         <HeaderMenu/>
       </n-layout-header>
       <n-layout-content class="content">
@@ -21,6 +21,9 @@ import HeaderMenu from './components/HeaderMenu.component.vue';
 </template>
 
 <style scoped>
+.header {
+  background-color: rgba(255, 132, 179, 0.203);
+}
 .content {
   margin-top: 1em;
   margin-left: 3em;
